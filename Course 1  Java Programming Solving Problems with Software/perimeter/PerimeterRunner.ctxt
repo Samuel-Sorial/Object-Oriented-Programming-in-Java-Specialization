@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=PerimeterRunner
+comment1.params=s
+comment1.target=double\ getPerimeter(edu.duke.Shape)
+comment2.params=s
+comment2.target=int\ getNumPoints(edu.duke.Shape)
+comment3.params=s
+comment3.target=double\ getAverageLength(edu.duke.Shape)
+comment4.params=s
+comment4.target=double\ getLargestSide(edu.duke.Shape)
+comment5.params=s
+comment5.target=double\ LargestX(edu.duke.Shape)
+comment6.params=
+comment6.target=void\ testPerimeter()
+comment7.params=args
+comment7.target=void\ main(java.lang.String[])
+numComments=8
