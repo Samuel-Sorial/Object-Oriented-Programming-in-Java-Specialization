@@ -26,9 +26,9 @@ public String findSimpleGene(String dna,String startCodon,String stopCodon)
 }
 public void testSimpleGene()
 {
-    String dna = "GTEATGEETGTEETGTTAER";
+    String dna = "AAATGCCCTAACTAGATTAAGAAACC";
     System.out.println("The dna is "+ dna);
-    String gene = findSimpleGene(dna,"ATG","TTA");
+    String gene = findSimpleGene(dna,"ATG","TAA");
     System.out.println(gene);
     dna = "GTEATGEETGTEETGTTER";
     System.out.println("The dna is "+ dna);
