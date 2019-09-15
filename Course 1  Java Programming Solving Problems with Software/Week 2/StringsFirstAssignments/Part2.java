@@ -6,13 +6,13 @@
  * @version (a version number or a date)
  */
 public class Part2 {
-public String findSimpleGene(String dna)
+public String findSimpleGene(String dna,String startCodon,String stopCodon)
 {
-    int startIndex = dna.indexOf("ATG");
+    int startIndex = dna.indexOf(startCodon);
     if(startIndex==-1){
         return " No gene was found ";
     }
-    int endIndex = dna.indexOf("TTA", startIndex+3);
+    int endIndex = dna.indexOf(stopCodon, startIndex+3);
     if(endIndex == -1)
     {
         return " No gene was found ";
@@ -28,23 +28,23 @@ public void testSimpleGene()
 {
     String dna = "GTEATGEETGTEETGTTAER";
     System.out.println("The dna is "+ dna);
-    String gene = findSimpleGene(dna);
+    String gene = findSimpleGene(dna,"ATG","TTA");
     System.out.println(gene);
     dna = "GTEATGEETGTEETGTTER";
     System.out.println("The dna is "+ dna);
-    gene = findSimpleGene(dna);
+    gene = findSimpleGene(dna,"ATG","TTA");
     System.out.println(gene);
     dna = "GTEATGEETGTETGTTAER";
     System.out.println("The dna is "+ dna);
-    gene = findSimpleGene(dna);
+    gene = findSimpleGene(dna,"ATG","TTA");
     System.out.println(gene);
     dna = "GTEATEETGTEETGTTAER";
     System.out.println("The dna is "+ dna);
-    gene = findSimpleGene(dna);
+    gene = findSimpleGene(dna,"ATG","TTA");
     System.out.println(gene);
     dna = "GTEEETGTEETGER";
     System.out.println("The dna is "+ dna);
-    gene = findSimpleGene(dna);
+    gene = findSimpleGene(dna,"ATG","TTA");
     System.out.println(gene);
 }
 }
