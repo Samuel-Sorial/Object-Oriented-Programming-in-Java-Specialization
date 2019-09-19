@@ -10,7 +10,7 @@ public class CSV {
     public void tester(){
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
-        bigExporters(parser,"$400,000,000");
+        bigExporters(parser,"$999,999,999,999");
         
     }
     public String countryInfo(CSVParser parser, String country)
