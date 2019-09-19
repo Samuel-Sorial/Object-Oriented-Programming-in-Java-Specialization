@@ -10,8 +10,8 @@ public class CSV {
     public void tester(){
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
-        String info = countryInfo(parser,"Germany");
-        System.out.println(info);
+        listExportersTwoProducts(parser,"gold","diamonds");
+        
     }
     public String countryInfo(CSVParser parser, String country)
     {
@@ -25,5 +25,18 @@ public class CSV {
             }
         }
         return info;
+    }
+    public void listExportersTwoProducts(CSVParser parser,
+                                         String exportItem1,
+                                         String exportItem2)
+    {
+        for(CSVRecord record : parser)
+        {
+            String exports = record.get("Exports");
+            if(exports.contains(exportItem1) && exports.contains(exportItem2))
+            {
+                System.out.println(record.get("Country"));
+            }
+        }
     }
 }
