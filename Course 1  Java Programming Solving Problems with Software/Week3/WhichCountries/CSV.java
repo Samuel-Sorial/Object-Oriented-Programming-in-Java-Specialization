@@ -10,7 +10,7 @@ public class CSV {
     public void tester(){
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
-        listExportersTwoProducts(parser,"gold","diamonds");
+        bigExporters(parser,"$400,000,000");
         
     }
     public String countryInfo(CSVParser parser, String country)
@@ -36,6 +36,32 @@ public class CSV {
             if(exports.contains(exportItem1) && exports.contains(exportItem2))
             {
                 System.out.println(record.get("Country"));
+            }
+        }
+    }
+    public int numberOfExporters(CSVParser parser, String exportItem)
+    {
+        int count = 0;
+        for(CSVRecord record : parser)
+        {
+            String exports = record.get("Exports");
+            if(exports.contains(exportItem))
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    public void bigExporters(CSVParser parser, String amount)
+    {
+        int len = amount.length();
+        for(CSVRecord record : parser)
+        {
+            int len2 = record.get("Value (dollars)").length();
+            if(len2>len)
+            {
+                System.out.println(record.get("Country" ) + 
+                                   record.get("Value (dollars)"));
             }
         }
     }
