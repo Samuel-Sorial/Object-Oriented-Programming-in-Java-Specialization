@@ -16,12 +16,13 @@ public class getData {
         int uniqeNames = 0;
         int uniqeBoys = 0;
         int uniqeGirls = 0;
-        for(CSVRecord record : fr.getCSVParser())
+        for(CSVRecord record : fr.getCSVParser(false))
         {
             int numBorn = Integer.parseInt(record.get(2));
             totalBirths += numBorn;
             uniqeNames++;
-            if(record.get(1).equals("M"))
+            String gen = record.get(1);
+            if(gen.contains("M"))
             {
                 totalBoys += numBorn;
                 uniqeBoys++;
@@ -45,7 +46,7 @@ public class getData {
         FileResource fr = new FileResource(yearName);
         int thisBirth = 0;
         int Rank = 1;
-        for(CSVRecord record : fr.getCSVParser())
+        for(CSVRecord record : fr.getCSVParser(false))
         {
             if(record.get(1).equals(gender) && record.get(0).equals(name))
             {
@@ -64,7 +65,7 @@ public class getData {
     {
         String yearName = "years/yob" + year + ".csv";
         FileResource fr = new FileResource(yearName);
-        for(CSVRecord record : fr.getCSVParser())
+        for(CSVRecord record : fr.getCSVParser(false))
         {
             String name = record.get(0);
             int ranking = Rank(year,name,gender);
@@ -89,11 +90,14 @@ public class getData {
             String fileName = f.getName();
             int year = getYear(fileName);
             int rank = Rank(year,name,gender);
+            if(rank!=-1)
+            {
             if(rank<highestRank)
             {
                 highestYear = year;
                 highestRank = rank;
             }
+        }
         }
         return highestYear;
     }
@@ -127,7 +131,7 @@ public class getData {
         int totalBirths = 0;
         String yearName = "years/yob" + year + ".csv";
         FileResource fr = new FileResource(yearName);
-        for(CSVRecord record : fr.getCSVParser())
+        for(CSVRecord record : fr.getCSVParser(false))
         {
             String currName = record.get(0);
             int currBirth = Integer.parseInt(record.get(2));
