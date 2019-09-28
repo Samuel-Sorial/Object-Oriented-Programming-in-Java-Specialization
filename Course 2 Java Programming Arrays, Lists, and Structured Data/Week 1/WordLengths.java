@@ -34,14 +34,24 @@ public class WordLengths {
     }
     return counts;
    }
+   public int indexOfMax(int[] values)
+   {
+       int maxIndex=0;
+       for(int i=0; i<values.length; i++)
+       {
+           if(values[maxIndex] < values[i])
+           {
+               maxIndex = i;
+            }
+        }
+        return maxIndex;
+    }
    public void testCountWordLengths()
    {
        FileResource fr = new FileResource();
        int[] counts = new int[31];
        counts = countWordLengths(fr,counts);
-       for(int i=0; i<counts.length; i++)
-       {
-           System.out.println(i + " appeard " + counts[i]);
-        }
-       }
+       System.out.println(indexOfMax(counts));
+   }
+   
 }
