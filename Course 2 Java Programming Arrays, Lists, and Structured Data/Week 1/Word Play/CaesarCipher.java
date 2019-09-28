@@ -67,4 +67,8 @@ public class CaesarCipher {
         }
         return encrypted.toString();
  }
+ public void test(String input, int key1,int key2)
+ {
+     System.out.println(encryptTwoKeys(input,key1,key2));
+    }
 }

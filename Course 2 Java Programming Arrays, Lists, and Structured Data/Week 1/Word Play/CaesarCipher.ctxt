@@ -5,4 +5,6 @@ comment1.params=input\ key
 comment1.target=java.lang.String\ encrypt(java.lang.String,\ int)
 comment2.params=input\ key1\ key2
 comment2.target=java.lang.String\ encryptTwoKeys(java.lang.String,\ int,\ int)
-numComments=3
+comment3.params=input\ key1\ key2
+comment3.target=void\ test(java.lang.String,\ int,\ int)
+numComments=4
