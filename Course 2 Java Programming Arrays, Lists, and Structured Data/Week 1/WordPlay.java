@@ -5,43 +5,44 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
+
+//import edu.duke.*;
+
 public class WordPlay {
-    public boolean isVowel(char ch)
-    {
-        char newChar = Character.toLowerCase(ch);
-        if(newChar=='a' || newChar=='e' || newChar=='i' || newChar=='o' || newChar=='u' )
-        {
+    public boolean isVowel(char ch){
+        String vowels = "aeiou";
+        char lower = Character.toLowerCase(ch);
+        if (vowels.indexOf(ch) != -1){
             return true;
         }
-        return false;
+        else{
+            return false;
+        }
     }
-    public String replaceVowels(String phrase , char ch)
-    {
-        StringBuilder st = new StringBuilder(phrase);
-        for(int i = 0; i<phrase.length(); i++)
-        {
-            char currChar = phrase.charAt(i);
-            if(isVowel(currChar))
-            {
-                st.setCharAt(i,ch);
+    
+    public String replaceVowels(String phrase, char ch){
+        String lower = phrase.toLowerCase();
+        StringBuilder replace = new StringBuilder(lower);
+        for (int i = 0; i < replace.length(); i++){
+            if (isVowel(replace.charAt(i)) == true){
+                replace.setCharAt(i, ch);
             }
         }
-        return st.toString();
+        return replace.toString();
     }
-    public String emphasize(String phrase, char ch)
-    {
-        StringBuilder st = new StringBuilder(phrase);
-        for(int i = 0; i<phrase.length(); i++)
-        {
-            char currChar = phrase.charAt(i);
-            if(currChar==ch)
-            {
-                if(i%2==0)
-                    st.setCharAt(i,'*');
-                else
-                    st.setCharAt(i,'+');
+    
+    public String emphasize(String phrase, char ch){
+        StringBuilder emphasize = new StringBuilder(phrase);
+        for (int i = 0; i < emphasize.length(); i++){
+            if (emphasize.charAt(i) == ch || emphasize.charAt(i) == Character.toUpperCase(ch)){
+                if (i % 2 == 0){
+                    emphasize.setCharAt(i, '*');
+                }
+                else{
+                    emphasize.setCharAt(i, '+');
+                }
             }
         }
-        return st.toString();
+        return emphasize.toString();
     }
 }
