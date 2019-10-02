@@ -1,4 +1,4 @@
-
+import edu.duke.*;
 /**
  * Write a description of testCaesarCipherTwo here.
  * 
@@ -42,9 +42,12 @@ public class testCaesarCipherTwo {
     }
     
     public void simpleTests(){
-        String s = "Top ncmy qkff vi vguv vbg ycpx";
-        CaesarCipherTwo a = new CaesarCipherTwo(24, 6);
-        System.out.println(a.decrypt(s));
+        String s = "Can you imagine life WITHOUT the internet AND computers in your pocket?";
+        CaesarCipherTwo a = new CaesarCipherTwo(21, 8);
+        System.out.println(a.encrypt(s));
+        FileResource fr = new FileResource();
+        String f = fr.asString();
+        System.out.println(breakCaesarCipher(f));
     }
     
     public int getKey(String s){

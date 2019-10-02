@@ -33,14 +33,13 @@ public class testCaesarCipher {
     }
     
     public void simpleTests(){
-        CaesarCipher d = new CaesarCipher(0);
-        System.out.println(d);
         FileResource a = new FileResource();
         String b = a.asString();
-        CaesarCipher c = new CaesarCipher(18);
+        CaesarCipher c = new CaesarCipher(15);
         String encrypted = c.encrypt(b);
         System.out.println(encrypted);
         String decrypted = c.decrypt(encrypted);
+        System.out.println(maxIndex(countLetters(b)));
     }
     
     public String breakCaesarCipher(String input){
