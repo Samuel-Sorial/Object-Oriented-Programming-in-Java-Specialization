@@ -47,12 +47,11 @@ public class Codons {
         FileResource fr = new FileResource();
         String dna = fr.asString();
         dna = dna.trim().toUpperCase();
-        for(int i=0; i<3; i++){
-        System.out.println("frame starting with " + i);
-        buildCodonMap(i,dna);
+        System.out.println("frame starting with " + 0);
+        buildCodonMap(0,dna);
+        System.out.println("Uniqe codons: " +map.size());
         String mostCodon = getMostCommonCodon();
-        System.out.println("Most occure: " + mostCodon);
-        printCodonCounts(1,5);
-       }
+        System.out.println("Most occure: " + mostCodon + " occured: " + map.get(mostCodon));
+        printCodonCounts(6,8);
     }
 }

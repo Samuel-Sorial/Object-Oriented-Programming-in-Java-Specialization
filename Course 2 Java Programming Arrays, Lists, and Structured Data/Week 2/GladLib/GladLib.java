@@ -4,23 +4,16 @@ import edu.duke.*;
 import java.util.*;
 
 public class GladLib {
-    private ArrayList<String> adjectiveList;
-    private ArrayList<String> nounList;
-    private ArrayList<String> colorList;
-    private ArrayList<String> countryList;
-    private ArrayList<String> nameList;
-    private ArrayList<String> animalList;
-    private ArrayList<String> timeList;
-    private ArrayList<String> verbList;
-    private ArrayList<String> fruitList;
+    private HashMap<String,ArrayList<String>> map;
     private ArrayList<String> usedWords = new ArrayList<String>();
-    
+    private ArrayList<String> usedCategories = new ArrayList<String>();
     private Random myRandom;
     
     private static String dataSourceURL = "http://dukelearntoprogram.com/course3/data";
     private static String dataSourceDirectory = "data";
     
     public GladLib(){
+        map = new HashMap<String,ArrayList<String>>();
         initializeFromSource(dataSourceDirectory);
         myRandom = new Random();
     }
@@ -31,15 +24,12 @@ public class GladLib {
     }
     
     private void initializeFromSource(String source) {
-        adjectiveList= readIt(source+"/adjective.txt"); 
-        nounList = readIt(source+"/noun.txt");
-        colorList = readIt(source+"/color.txt");
-        countryList = readIt(source+"/country.txt");
-        nameList = readIt(source+"/name.txt");      
-        animalList = readIt(source+"/animal.txt");
-        timeList = readIt(source+"/timeframe.txt");
-        verbList = readIt(source+"/verb.txt");
-        fruitList = readIt(source+"/fruit.txt");
+        String[] categories = { "adjective","noun","color","country","name",
+            "animal","timeframe","verb","fruit"};
+        for(String s : categories)
+        {
+            map.put(s,readIt(source+"/"+s+".txt"));
+        }
     }
     
     private String randomFrom(ArrayList<String> source){
@@ -48,35 +38,8 @@ public class GladLib {
     }
     
     private String getSubstitute(String label) {
-        if (label.equals("country")) {
-            return randomFrom(countryList);
-        }
-        if (label.equals("color")){
-            return randomFrom(colorList);
-        }
-        if (label.equals("noun")){
-            return randomFrom(nounList);
-        }
-        if (label.equals("name")){
-            return randomFrom(nameList);
-        }
-        if (label.equals("adjective")){
-            return randomFrom(adjectiveList);
-        }
-        if (label.equals("animal")){
-            return randomFrom(animalList);
-        }
-        if (label.equals("timeframe")){
-            return randomFrom(timeList);
-        }
-        if (label.equals("verb")){
-            return randomFrom(verbList);
-        }
-        if (label.equals("fruit")){
-            return randomFrom(fruitList);
-        }
-        if (label.equals("number")){
-            return ""+myRandom.nextInt(50)+5;
+        if(map.containsKey(label)){
+        return randomFrom(map.get(label));
         }
         return "**UNKNOWN**";
     }
@@ -95,6 +58,9 @@ public class GladLib {
             sub = getSubstitute(w.substring(first+1,last));
         }
         usedWords.add(sub);
+        String category = w.substring(first+1,last);
+        if(!usedCategories.contains(category))
+            usedCategories.add(category);
         return prefix+sub+suffix;
     }
     
@@ -143,11 +109,30 @@ public class GladLib {
         }
         return list;
     }
-    
+    public void totalWordsInMap()
+    {
+        int totalNo = 0;
+        for(ArrayList<String> s : map.values())
+        {
+            totalNo += s.size();
+        }
+        System.out.println("The number of words we can choose from: " + totalNo);
+    }
+    private void totalWordsConsidered()
+    {
+        int totalNo=0;
+        for(String s : usedCategories)
+        {
+            int currNo = map.get(s).size();
+            totalNo+=currNo;
+        }
+        System.out.println("Total of considered is: " + totalNo);
+    }
     public void makeStory(){
         System.out.println("\n");
         String story = fromTemplate("datalong/madtemplate2.txt");
         printOut(story, 60);
         usedWords.clear();
+        usedCategories.clear();
     }    
 }

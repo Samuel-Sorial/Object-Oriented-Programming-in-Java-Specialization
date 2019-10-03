@@ -69,7 +69,8 @@ public class WordInFiles {
     public void tester()
     {
         buildWordFileMap();
-        System.out.println("The maximum file same word contained: " + maxNumber());
-        
+        //System.out.println("The maximum file same word contained: " + maxNumber());
+        //System.out.println("occures in 4 files is: " + wordsInNumFiles(4).size());
+        printFilesIn("tree");
     }
 }
