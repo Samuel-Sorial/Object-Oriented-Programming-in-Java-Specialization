@@ -21,7 +21,6 @@ public class LogEntry
        request = req;
        statusCode = status;
        bytesReturned = bytes;
-       
    }
    
    public String getIpAddress() {
