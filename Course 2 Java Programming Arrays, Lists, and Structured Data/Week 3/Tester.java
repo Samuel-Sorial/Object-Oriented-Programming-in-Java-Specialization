@@ -21,5 +21,6 @@ public class Tester
         LogAnalyzer analyzer = new LogAnalyzer();
         analyzer.readFile("short-test_log");
         analyzer.printAll();
+        System.out.println(analyzer.countUniqueIPs() + " Uniqe Ips");
     }
 }
