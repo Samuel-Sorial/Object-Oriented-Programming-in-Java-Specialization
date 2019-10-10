@@ -31,6 +31,15 @@ public class LogAnalyzer
             }
          return foundIPs.size();
      }
+     public void printAllHigherThanNum(int num)
+     {
+         for(LogEntry log : records)
+         {
+             int currIP = log.getStatusCode();
+             if(currIP>num)
+                System.out.println(log);
+            }
+     }
      public void printAll() {
          for (LogEntry le : records) {
              System.out.println(le);

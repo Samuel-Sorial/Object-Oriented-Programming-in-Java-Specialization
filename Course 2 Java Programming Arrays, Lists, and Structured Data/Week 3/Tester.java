@@ -22,5 +22,6 @@ public class Tester
         analyzer.readFile("short-test_log");
         analyzer.printAll();
         System.out.println(analyzer.countUniqueIPs() + " Uniqe Ips");
+        analyzer.printAllHigherThanNum(200);
     }
 }
