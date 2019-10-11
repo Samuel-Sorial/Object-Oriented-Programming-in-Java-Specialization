@@ -1,5 +1,3 @@
-
-
 import java.util.*;
 import edu.duke.*;
 
@@ -10,7 +8,6 @@ public class LogAnalyzer
      public LogAnalyzer() {
          records = new ArrayList<LogEntry>();
      }
-        
      public void readFile(String filename) {
          FileResource fr = new FileResource(filename);
          for(String line : fr.lines())
@@ -31,6 +28,25 @@ public class LogAnalyzer
             }
          return foundIPs.size();
      }
+     public ArrayList<String> uniqueIPVisitsOnDay(String someday)
+     {
+         String month = someday.substring(0,3);
+         String day = someday.substring(4);
+         ArrayList<String> foundIps = new ArrayList<String>();
+         for(LogEntry log : records)
+         {
+             String Date = log.getAccessTime().toString();
+             String dayDate = Date.substring(8,10);
+             if(Date.contains(month) && dayDate.equals(day))
+             {
+                 if(!foundIps.contains(log.getIpAddress()))
+                 {
+                     foundIps.add(log.getIpAddress());
+                 }
+             }
+         }
+         return foundIps;
+     }
      public void printAllHigherThanNum(int num)
      {
          for(LogEntry log : records)
@@ -40,9 +56,23 @@ public class LogAnalyzer
                 System.out.println(log);
             }
      }
+     public int countUniqueIPsInRange(int low , int high)
+     {
+         ArrayList<String> foundIps = new ArrayList<String>();
+         for(LogEntry log : records)
+         {
+             int currStatus = log.getStatusCode();
+             if(currStatus>=low && currStatus <= high && 
+             !foundIps.contains(log.getIpAddress()))
+             { 
+                 foundIps.add(log.getIpAddress());
+             }
+         }
+         return foundIps.size();
+     }
      public void printAll() {
          for (LogEntry le : records) {
              System.out.println(le);
          }
      }
-}
+    }   

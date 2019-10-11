@@ -19,9 +19,11 @@ public class Tester
     
     public void testLogAnalyzer() {
         LogAnalyzer analyzer = new LogAnalyzer();
-        analyzer.readFile("short-test_log");
-        analyzer.printAll();
-        System.out.println(analyzer.countUniqueIPs() + " Uniqe Ips");
-        analyzer.printAllHigherThanNum(200);
+        analyzer.readFile("weblog1_log");
+        //analyzer.printAll();
+        //System.out.println(analyzer.countUniqueIPs() + " Uniqe Ips");
+        //analyzer.printAllHigherThanNum(400);
+        //System.out.println(analyzer.uniqueIPVisitsOnDay("Mar 17").size());
+        System.out.println(analyzer.countUniqueIPsInRange(200,299));
     }
 }
