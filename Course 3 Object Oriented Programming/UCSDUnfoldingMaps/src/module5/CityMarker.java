@@ -1,51 +1,83 @@
 package module5;
 
+import de.fhpotsdam.unfolding.data.Feature;
+import de.fhpotsdam.unfolding.data.PointFeature;
 import de.fhpotsdam.unfolding.geo.Location;
-import de.fhpotsdam.unfolding.marker.SimplePointMarker;
+import processing.core.PConstants;
 import processing.core.PGraphics;
 
-/** Implements a common marker for cities and earthquakes on an earthquake map
+/**
+ * Implements a visual marker for cities on an earthquake map
  * 
  * @author UC San Diego Intermediate Software Development MOOC team
  * @author Your name here
  *
  */
-public abstract class CommonMarker extends SimplePointMarker {
+// TODO: Change SimplePointMarker to CommonMarker as the very first thing you do
+// in module 5 (i.e. CityMarker extends CommonMarker). It will cause an error.
+// That's what's expected.
+public class CityMarker extends CommonMarker {
 
-	// Records whether this marker has been clicked (most recently)
-	protected boolean clicked = false;
-	
-	public CommonMarker(Location location) {
+	public static int TRI_SIZE = 5; // The size of the triangle marker
+
+	public CityMarker(Location location) {
 		super(location);
 	}
-	
-	public CommonMarker(Location location, java.util.HashMap<java.lang.String,java.lang.Object> properties) {
-		super(location, properties);
+
+	public CityMarker(Feature city) {
+		super(((PointFeature) city).getLocation(), city.getProperties());
+		// Cities have properties: "name" (city name), "country" (country name)
+		// and "population" (population, in millions)
 	}
-	
-	// Getter method for clicked field
-	public boolean getClicked() {
-		return clicked;
+
+	/**
+	 * Implementation of method to draw marker on the map.
+	 */
+	@Override
+	public void drawMarker(PGraphics pg, float x, float y) {
+		// Save previous drawing style
+		pg.pushStyle();
+
+		// IMPLEMENT: drawing triangle for each city
+		pg.fill(150, 30, 30);
+		pg.triangle(x, y - TRI_SIZE, x - TRI_SIZE, y + TRI_SIZE, x + TRI_SIZE, y + TRI_SIZE);
+
+		// Restore previous drawing style
+		pg.popStyle();
 	}
-	
-	// Setter method for clicked field
-	public void setClicked(boolean state) {
-		clicked = state;
+
+	/** Show the title of the city if this marker is selected */
+	public void showTitle(PGraphics pg, float x, float y) {
+		String name = getCity() + " " + getCountry() + " ";
+		String population = "Pop: " + getPopulation() + " Million";
+
+		pg.pushStyle();
+
+		pg.fill(255, 255, 255);
+		pg.textSize(12);
+		pg.rectMode(PConstants.CORNER);
+		pg.rect(x, y - TRI_SIZE - 39, Math.max(pg.textWidth(name), pg.textWidth(population)) + 6, 39);
+		pg.fill(0, 0, 0);
+		pg.textAlign(PConstants.LEFT, PConstants.TOP);
+		pg.text(name, x + 3, y - TRI_SIZE - 33);
+		pg.text(population, x + 3, y - TRI_SIZE - 18);
+
+		pg.popStyle();
 	}
-	
-	// Common piece of drawing method for markers; 
-	// Note that you should implement this by making calls 
-	// drawMarker and showTitle, which are abstract methods 
-	// implemented in subclasses
-	public void draw(PGraphics pg, float x, float y) {
-		// For starter code just drawMaker(...)
-		if (!hidden) {
-			drawMarker(pg, x, y);
-			if (selected) {
-				showTitle(pg, x, y);  // You will implement this in the subclasses
-			}
-		}
+
+	/*
+	 * Local getters for some city properties.
+	 */
+	public String getCity() {
+		return getStringProperty("name");
 	}
-	public abstract void drawMarker(PGraphics pg, float x, float y);
-	public abstract void showTitle(PGraphics pg, float x, float y);
+
+	public String getCountry() {
+		return getStringProperty("country");
+	}
+
+	public float getPopulation() {
+		return Float.parseFloat(getStringProperty("population"));
+	}
+
 }
